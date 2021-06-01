@@ -1,0 +1,135 @@
+categories:
+  - Diligesoft
+questions:
+  - variable: qddns.ipCheckInterval
+    default: 3m
+    type: string
+    description: "Time interval (Xs, Xm or Xh) to perform the check and adjustment if needed. Please don't configure it to be less than 3m if you are not using Google WiFi"
+    label: Time interval to check/syncronize IP
+  - variable: qddns.routerIP
+    default: "192.168.86.1"
+    type: string
+    description: "IP Address of your Google WiFi Router or 'none' if you don't have one"
+    label: Google WiFi IP
+  - variable: logLevel
+    default: INFO
+    type: enum
+    description: "Service Logging Level"
+    label: Logging Level
+    options:
+      - OFF
+      - FATAL
+      - ERROR
+      - WARN
+      - INFO
+      - DEBUG
+      - TRACE
+      - ALL
+  - variable: route53.hostedZoneId
+    default: ""
+    type: string
+    description: "AWS Route53 Hosted ZoneId"
+    label: Hosted ZoneId
+  - variable: route53.domain
+    default: "your-domain.com."
+    type: hostname
+    description: "AWS Route53 Domain name to manage"
+    label: Domain Name
+  - variable: route53.region
+    default: "us-west-2"
+    type: string
+    description: "AWS Region"
+    label: AWS Region
+  # Resources
+  - variable: resources.limits.cpu
+    default: 100m
+    description: "Specify CPU Limit for container"
+    type: string
+    label: CPU Limit
+    group: "Resources"
+  - variable: resources.requests.cpu
+    default: 10m
+    description: "Specify CPU request for container"
+    type: string
+    label: CPU Request
+    group: "Resources"
+  - variable: resources.request.memory
+    default: 30Mi
+    description: "RAM request for container"
+    type: string
+    label: Container Memory Request
+    group: "Resources"
+  - variable: resources.limits.memory
+    default: 30Mi
+    description: "RAM limit for container"
+    type: string
+    label: Container Memory Limit
+    group: "Resources"
+  # Health Checks
+  - variable: healthChecks.liveness.enabled
+    default: true
+    description: "Liveness probe enabled"
+    type: boolean
+    label: Enable/Disable Automated Liveness Probe
+    show_subquestion_if: true
+    group: "Liveness Probe"
+    subquestions:
+      - variable: healthChecks.liveness.initialDelaySeconds
+        default: 1
+        description: "Initial delay for the liveness probe to start"
+        type: string
+        required: true
+        label: Initial delay (seconds)
+      - variable: healthChecks.liveness.periodSeconds
+        default: 15
+        description: "Period for the liveness probe"
+        type: string
+        required: true
+        label: Period (seconds)
+      - variable: healthChecks.liveness.failureThreshold
+        default: 6
+        description: "Failure Threshold for the liveness probe"
+        type: string
+        required: true
+        label: Failure Threshold (unsuccessful attempts)
+  - variable: healthChecks.readiness.enabled
+    default: true
+    description: "Readiness probe enabled"
+    type: boolean
+    label: Enable/Disable Automated Readiness Probe
+    show_subquestion_if: true
+    group: "Readiness Probe"
+    subquestions:
+      - variable: healthChecks.readiness.initialDelaySeconds
+        default: 1
+        description: "Initial delay for the readiness probe to start"
+        type: string
+        required: true
+        label: Initial delay (seconds)
+      - variable: healthChecks.readiness.periodSeconds
+        default: 5
+        description: "Period for the readiness probe"
+        type: string
+        required: true
+        label: Period (seconds)
+      - variable: healthChecks.readiness.failureThreshold
+        default: 6
+        description: "Failure threshold for the readiness probe"
+        type: string
+        required: true
+        label: Failure Threshold (unsuccessful attempts)
+  #Troubleshooting, Debug & JVM Profiling
+  - variable: debugAndProfiling.enabled
+    default: "false"
+    description: "Enable Debug & JVM Profiling"
+    type: boolean
+    required: true
+    group: "Troubleshooting, Debug & JVM Profiling"
+    label: Enable Debug and Profiling
+  - variable: debugAndProfiling.jvmCmdLineArguments
+    default: ""
+    type: string
+    description: "Command line arguments for JVM"
+    label: Command line arguments
+    group: "Troubleshooting, Debug & JVM Profiling"
+    show_if: "debugAndProfiling.enabled=true"

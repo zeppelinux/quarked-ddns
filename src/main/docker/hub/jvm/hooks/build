@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IMAGE_TAG="${IMAGE_NAME}-jvm"
+
+docker build -f Dockerfile --build-arg TAG=$DOCKER_TAG -t $IMAGE_TAG .

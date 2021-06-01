@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IMAGE_TAG="${IMAGE_NAME}-linux"
+
+docker push ${IMAGE_TAG}

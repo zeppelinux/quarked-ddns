@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IMAGE_TAG="${IMAGE_NAME}-jvm"
+
+docker push ${IMAGE_TAG}

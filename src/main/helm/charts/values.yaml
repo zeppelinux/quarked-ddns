@@ -1,0 +1,93 @@
+# Default values for test.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ${dockerImageName}
+  tag: ${project.version}-linux
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+kubeConfig: ""
+
+service:
+  name: ${project.build.finalName}
+  type: ClusterIP
+  port: 80
+  serviceExternalTrafficPolicy: Local
+
+ingress:
+  enabled: false
+
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 30Mi
+  limits:
+    cpu: 10m
+    memory: 30Mi
+
+healthChecks:
+  liveness:
+    enabled: true
+    periodSeconds: 20
+    initialDelaySeconds: 1
+    failureThreshold: 5
+  readiness:
+    enabled: true
+    periodSeconds: 15
+    initialDelaySeconds: 1
+    failureThreshold: 5
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+debugAndProfiling:
+  enabled: false
+  jvmCmdLineArguments: ""
+
+logLevel: INFO
+qddns:
+  routerIP: "192.168.86.1"
+  ipCheckInterval: 3m
+  vendors:
+    {
+      "http:checkip.amazonaws.com":{
+        "regex":'.\*'
+      },
+      "https:api.ipify.org?format=json":{
+        "jsonpath":'\$.ip'
+      },
+      "https:api.myip.com":{
+        "jsonpath":'\$.ip'
+      },
+      "https:icanhazip.com":{
+        "regex":'.\*'
+      },
+      "http:checkip.dyndns.org":{
+        "xpathAndRegex":{
+          "xpath":"/html/body",
+          "regex":'(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.(?!$)|$)){4}$'
+        }
+      },
+      "http:trackip.net/pfsense":{
+        "xpathAndRegex":{
+        "xpath":"/html/body",
+        "regex":'(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.(?!$)|$)){4}$'
+        }
+      },
+      "http:ip-api.com/json":{
+        "jsonpath":'\$.query'
+      }
+    }
+route53:
+  hostedZoneId: Z3B8I4S7UFXBEV
+  domain: rancher.diligesoft.com
+  region: us-west-2

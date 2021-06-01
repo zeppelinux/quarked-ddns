@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for the ${project.build.finalName} deployment
+name: ${project.build.finalName}
+version: ${project.version}

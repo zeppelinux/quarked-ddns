@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+data:
+  logLevel: {{ .Values.logLevel}}
+  qddns.ipCheckInterval: {{ .Values.qddns.ipCheckInterval }}
+  qddns.routerIP: {{ .Values.qddns.routerIP }}
+  qddns.vendors: {{ .Values.qddns.vendors | toJson | quote }}
+  route53.domain: {{ .Values.route53.domain }}
+  route53.hostedZoneId: {{ .Values.route53.hostedZoneId }}
+  route53.region: {{ .Values.route53.region }}

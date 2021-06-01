@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "${project.build.finalName}.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ include "${project.build.finalName}.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+        {{- if (.Values.debugAndProfiling.enabled)}}
+  type: NodePort
+        {{- else }}
+  type: ClusterIP
+          {{- end }}
+        {{- if (or (eq .Values.service.type "LoadBalancer") (eq .Values.service.type "NodePort")) }}
+  externalTrafficPolicy: {{ .Values.service.serviceExternalTrafficPolicy | quote }}
+        {{- end }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+            {{- if (.Values.debugAndProfiling.enabled)}}
+      nodePort: {{ .Values.service.nodePorts.http }}
+    - name: jmx
+      port: 5555
+      targetPort: jmx
+      nodePort: {{ .Values.service.nodePorts.jmx }}
+    - name: debug
+      port: 5005
+      targetPort: debug
+      nodePort: {{ .Values.service.nodePorts.debug }}
+        {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
