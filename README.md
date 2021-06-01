@@ -1,9 +1,10 @@
 # quarked-ddns
-Provides Dynamic DNS solution by integrating  [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) 
-(or public services if Google WiFi Router is not available) and [Amazon Route53](https://aws.amazon.com/route53/). 
+Provides Dynamic DNS solution. 
 
-If Google WiFi is disabled quarked-ddns uses public services from the list below to get your public IP. Following list 
-of public services is pre-configured and used out of the box:
+Ideally it integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) but can use 
+public services if Google WiFi Router is not available. 
+
+If Google WiFi is integration disabled quarked-ddns uses public services from the list below to get your public IP:
 ```
 http://checkip.amazonaws.com
 https://api.ipify.org
@@ -12,15 +13,14 @@ https://icanhazip.com
 http://checkip.dyndns.org
 http://trackip.net
 http://ip-api.com
-```
-To avoid overloading some specific server the quarked-ddns service will randomly pick and use one endpoint from the list.
-If public service endpoint returns IP which is different from the current one - the result is validated by using another public endpoint.
-Additional/different services can be configured, [read here](http://todo). It is also very cheap to deploy your own 
-'what is my IP' service by using something like [Amazon Lambda](https://aws.amazon.com/lambda/) or any other 'Server-less' solution.
-Consider doing this if you have the knowledge.
+``` 
+For the details about the workflow involving punblic endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
+service will randomly pick and use one endpoint from the list.
 
-There is also hardcoded limitation for how frequently quarked-ddns can hit the public service from the list, currently it is 3 minutes.
-So, if you need really fast sync between your dynamic IP and Route53 DNS record - consider investing in Google WiFi.
+This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify it. 
+It is also very cheap to deploy your own 'what is my IP' service by using something like [Amazon Lambda](https://aws.amazon.com/lambda/) 
+or any other 'Server-less' solution and use it as an endpoint for the quarked-ddns.
+
 If you own or aware of any other mainstream router that provides the REST API or some reliable public IP service - let us know. 
 
 ## Prerequisites
@@ -32,8 +32,8 @@ quarked-ddns service supports following deployments:
 - Native linux binary
 - Java process
 - Docker container
-- Helm Chart
-- Rancher Application
+- Kubernetes cluster (Helm Chart available)
+- Kubernetes/Rancher Application
 
 ## Configuration
 1. Use [Amazon IAM](https://console.aws.amazon.com/iam) to add/update user for programmatic access with permissions to 
