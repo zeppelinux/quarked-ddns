@@ -4,7 +4,8 @@ Provides Dynamic DNS solution.
 Ideally it integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) but can use 
 public services if Google WiFi Router is not available. 
 
-If Google WiFi is integration disabled quarked-ddns uses public services from the list below to get your public IP:
+If Google WiFi is integration disabled quarked-ddns will use public services endpoints from the list below in order to get 
+and verify your public IP:
 ```
 http://checkip.amazonaws.com
 https://api.ipify.org
@@ -14,8 +15,8 @@ http://checkip.dyndns.org
 http://trackip.net
 http://ip-api.com
 ``` 
-For the details about the workflow involving punblic endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
-service will randomly pick and use one endpoint from the list.
+In order to protect your environment from fault play at least two public services responses are used to get and confirm the IP change.
+For more indo about the workflow involving public endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
 
 This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify it. 
 It is also very cheap to deploy your own 'what is my IP' service by using something like [Amazon Lambda](https://aws.amazon.com/lambda/) 
