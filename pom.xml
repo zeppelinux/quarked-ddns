@@ -6,6 +6,28 @@
     <groupId>com.diligesoft</groupId>
     <artifactId>quarked-ddns</artifactId>
     <version>v0.1</version>
+    <description>Quarked Dynamic DNS</description>
+    <url>https://github.com/zeppelinux/quarked-ddns</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>zeppelinux</id>
+            <name>Dmitry Shultz</name>
+            <email>dmitry@diligesoft.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:zeppelinux/quarked-ddns.git</connection>
+        <developerConnection>scm:git:ssh://github.com:zeppelinux/quarked-ddns.git</developerConnection>
+        <url>https://github.com/zeppelinux/quarked-ddns/tree/main</url>
+    </scm>
     <properties>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
