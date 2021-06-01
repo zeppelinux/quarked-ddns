@@ -1,6 +1,6 @@
-package com.diligesoft.gwifiddns.routes;
+package com.diligesoft.qddns.routes;
 
-import com.diligesoft.gwifiddns.Route53Bean;
+import com.diligesoft.qddns.Route53Bean;
 import io.quarkus.runtime.configuration.ProfileManager;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;

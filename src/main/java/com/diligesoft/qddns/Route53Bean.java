@@ -1,8 +1,8 @@
-package com.diligesoft.gwifiddns;
+package com.diligesoft.qddns;
 
 import com.amazonaws.services.route53.AmazonRoute53;
 import com.amazonaws.services.route53.model.*;
-import com.diligesoft.gwifiddns.vendors.Vendor;
+import com.diligesoft.qddns.vendors.Vendor;
 import io.quarkus.arc.Unremovable;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.apache.camel.Body;
@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.diligesoft.gwifiddns.routes.VendorsRoute.CURRENT_VENDOR;
+import static com.diligesoft.qddns.routes.VendorsRoute.CURRENT_VENDOR;
 
 @ApplicationScoped
 @Unremovable

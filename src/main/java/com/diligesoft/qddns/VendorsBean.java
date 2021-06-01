@@ -1,7 +1,7 @@
-package com.diligesoft.gwifiddns;
+package com.diligesoft.qddns;
 
 import com.diligesoft.config.utils.cdi.ConfigPropertyMap;
-import com.diligesoft.gwifiddns.vendors.Vendor;
+import com.diligesoft.qddns.vendors.Vendor;
 import io.quarkus.arc.Unremovable;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.jboss.logging.Logger;

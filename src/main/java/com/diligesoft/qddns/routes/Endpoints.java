@@ -1,4 +1,4 @@
-package com.diligesoft.gwifiddns.routes;
+package com.diligesoft.qddns.routes;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

@@ -1,8 +1,8 @@
-package com.diligesoft.gwifiddns.routes;
+package com.diligesoft.qddns.routes;
 
-import com.diligesoft.gwifiddns.VendorsBean;
-import com.diligesoft.gwifiddns.VerifyBean;
-import com.diligesoft.gwifiddns.vendors.Vendor;
+import com.diligesoft.qddns.VendorsBean;
+import com.diligesoft.qddns.VerifyBean;
+import com.diligesoft.qddns.vendors.Vendor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 

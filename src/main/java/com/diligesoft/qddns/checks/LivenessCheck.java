@@ -1,6 +1,6 @@
-package com.diligesoft.gwifiddns.checks;
+package com.diligesoft.qddns.checks;
 
-import com.diligesoft.gwifiddns.routes.TriggerRoute;
+import com.diligesoft.qddns.routes.TriggerRoute;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.HealthCheckResponseBuilder;

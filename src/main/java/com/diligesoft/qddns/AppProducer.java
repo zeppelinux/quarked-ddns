@@ -1,4 +1,4 @@
-package com.diligesoft.gwifiddns;
+package com.diligesoft.qddns;
 
 import com.amazonaws.services.route53.AmazonRoute53;
 import com.amazonaws.services.route53.AmazonRoute53ClientBuilder;

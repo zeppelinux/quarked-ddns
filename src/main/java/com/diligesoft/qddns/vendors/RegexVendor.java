@@ -1,4 +1,4 @@
-package com.diligesoft.gwifiddns.vendors;
+package com.diligesoft.qddns.vendors;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 

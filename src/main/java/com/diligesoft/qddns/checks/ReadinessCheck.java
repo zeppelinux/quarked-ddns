@@ -1,4 +1,4 @@
-package com.diligesoft.gwifiddns.checks;
+package com.diligesoft.qddns.checks;
 
 import com.amazonaws.services.route53.AmazonRoute53;
 import org.eclipse.microprofile.health.HealthCheck;

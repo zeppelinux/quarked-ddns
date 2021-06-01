@@ -1,6 +1,6 @@
-package com.diligesoft.gwifiddns;
+package com.diligesoft.qddns;
 
-import com.diligesoft.gwifiddns.vendors.Vendor;
+import com.diligesoft.qddns.vendors.Vendor;
 import io.quarkus.arc.Unremovable;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.apache.camel.Body;
@@ -13,8 +13,8 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import static com.diligesoft.gwifiddns.routes.VendorsRoute.CURRENT_VENDOR;
-import static com.diligesoft.gwifiddns.routes.VendorsRoute.VERIFY_VENDOR;
+import static com.diligesoft.qddns.routes.VendorsRoute.CURRENT_VENDOR;
+import static com.diligesoft.qddns.routes.VendorsRoute.VERIFY_VENDOR;
 
 @Named
 @Unremovable
