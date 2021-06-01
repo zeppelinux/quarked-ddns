@@ -25,11 +25,11 @@ ingress:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 30Mi
+    cpu: "10m"
+    memory: "30Mi"
   limits:
-    cpu: 10m
-    memory: 30Mi
+    cpu: "10m"
+    memory: "30Mi"
 
 healthChecks:
   liveness:
@@ -56,7 +56,7 @@ debugAndProfiling:
 logLevel: INFO
 qddns:
   routerIP: "192.168.86.1"
-  ipCheckInterval: 3m
+  ipCheckInterval: "3m"
   vendors:
     {
       "http:checkip.amazonaws.com":{
@@ -88,6 +88,6 @@ qddns:
       }
     }
 route53:
-  hostedZoneId: Z3B8I4S7UFXBEV
-  domain: rancher.diligesoft.com
-  region: us-west-2
+  hostedZoneId: "YOUR-ZONE-ID"
+  domain: "YOUR-DOMAIN"
+  region: "aws-region"

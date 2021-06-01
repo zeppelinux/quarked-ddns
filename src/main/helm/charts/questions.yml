@@ -2,7 +2,7 @@ categories:
   - Diligesoft
 questions:
   - variable: qddns.ipCheckInterval
-    default: 3m
+    default: "3m"
     type: string
     description: "Time interval (Xs, Xm or Xh) to perform the check and adjustment if needed. Please don't configure it to be less than 3m if you are not using Google WiFi"
     label: Time interval to check/syncronize IP
@@ -31,8 +31,8 @@ questions:
     description: "AWS Route53 Hosted ZoneId"
     label: Hosted ZoneId
   - variable: route53.domain
-    default: "your-domain.com."
-    type: hostname
+    default: "your-domain-to-manage.com."
+    type: string
     description: "AWS Route53 Domain name to manage"
     label: Domain Name
   - variable: route53.region
@@ -42,25 +42,25 @@ questions:
     label: AWS Region
   # Resources
   - variable: resources.limits.cpu
-    default: 100m
+    default: "100m"
     description: "Specify CPU Limit for container"
     type: string
     label: CPU Limit
     group: "Resources"
   - variable: resources.requests.cpu
-    default: 10m
+    default: "10m"
     description: "Specify CPU request for container"
     type: string
     label: CPU Request
     group: "Resources"
-  - variable: resources.request.memory
-    default: 30Mi
+  - variable: resources.requests.memory
+    default: "30Mi"
     description: "RAM request for container"
     type: string
     label: Container Memory Request
     group: "Resources"
   - variable: resources.limits.memory
-    default: 30Mi
+    default: "30Mi"
     description: "RAM limit for container"
     type: string
     label: Container Memory Limit

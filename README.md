@@ -68,8 +68,8 @@ Grab the quarked-ddns-linux binary from the recent release, and create .env file
 route53.domain=<your-domain>
 route53.region=<your-iam-user-region>
 route53.hostedZoneId=<your-hosted-zone-id>
-AWS_ACCESS_KEY_ID=<your-key-id>
-AWS_SECRET_KEY=<your-secret-key>
+aws.accessKey=<your-key-id>
+aws.secretKey=<your-secret-key>
 ```
 You can also set your AWS key and secret as env variables for the process: 
 ```
@@ -87,7 +87,7 @@ logLevel=INFO
 qddns.ipCheckInterval=5m
 qddns.routerIP=192.168.86.1
 ```
-If you want for example to disable Google WiFi Router (if you don't have one) and want 10m check interval:
+If you want to disable Google WiFi Router API integration (if you don't have one) and want 10m check interval:
 ```
 $./gwifi-ddns-linux -Dqddns.routerIP=none -Dqddns.ipCheckInterval=10m
 ```
@@ -109,14 +109,16 @@ $java -DlogLevel=DEBUG -jar quarkus-app/quarkus-run.jar
 
 ## Docker Container
 ```
-$docker pull zeppelinux/quarked-ddns
+$docker pull zeppelinux/quarked-ddns:tag
 ```
+Note, there are two docker images available vX.X-linux and vX.X-jvm. Linux one uses Linux executable while JVM one runs Java.
+
 Then you have to set up all the required env variables, [read here](https://docs.docker.com/engine/reference/commandline/run/) 
 about how to do it.
 
 ## Helm Chart
-Helm/Kubernetes deployments require quarked-ddns secret with AWS_ACCESS_KEY_ID and AWS_SECRET_KEY keys/values available 
-in the same namespace where app is installed.
+Helm/Kubernetes deployments require quarked-ddns Secret with AWS_ACCESS_KEY_ID and AWS_SECRET_KEY keys/values available 
+in the same namespace where the app is installed.
 ```
 helm repo add zeppelinux https://charts.diligesoft.com
 helm show values zeppelinux/quarked-ddns
