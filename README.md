@@ -1,5 +1,5 @@
 # quarked-ddns
-Provides Dynamic DNS solution. 
+Provides Dynamic DNS solution running. 
 
 Ideally it integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) but can use 
 public services if Google WiFi Router is not available. 
@@ -32,7 +32,7 @@ If you own or aware of any other mainstream router that provides the REST API or
 quarked-ddns runs on Quarkus, i.e. it consumes very little resources (~10MiB of RAM & ~3mCPU):
 ![Resources Screenshot](https://zeppelinux.github.io/images/qddns-resources-screenshot.png)
 
-btw, it takes only ~36ms to boot
+it takes ~36ms to boot
 ![Boot Time Screenshot](https://zeppelinux.github.io/images/qddns-boot-log.png)
 
 ## Target Platforms
@@ -146,7 +146,7 @@ Add [Helm Charts Catalogue](https://charts.diligesoft.com) to the Rancher catalo
 
 # How To compile and run locally
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project uses Quarkus, the Supersonic Subatomic Java Framework, so all the goodies of Quarkus are available out of the box
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/.
 
