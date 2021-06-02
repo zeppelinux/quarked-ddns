@@ -28,6 +28,13 @@ If you own or aware of any other mainstream router that provides the REST API or
 1. Domain managed by the [Amazon Route53](https://aws.amazon.com/route53/)
 2. AWS_ACCESS_KEY_ID and AWS_SECRET_KEY for IAM that can manage your domain (read below how to get it)
 
+## Resources
+quarked-ddns runs on Quarkus, i.e. it consumes very little resources (~10MiB of RAM & ~3mCPU):
+![Resources Screenshot](https://zeppelinux.github.io/images/qddns-resources-screenshot.png)
+
+btw, it takes only ~36ms to boot
+![Boot Time Screenshot](https://zeppelinux.github.io/images/qddns-boot-log.png)
+
 ## Target Platforms
 quarked-ddns service supports following deployments:
 - Native linux binary
