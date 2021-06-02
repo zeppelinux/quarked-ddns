@@ -15,8 +15,8 @@ http://checkip.dyndns.org
 http://trackip.net
 http://ip-api.com
 ``` 
-In order to protect your environment from fault play at least two public services responses are used to get and confirm the IP change.
-For more indo about the workflow involving public endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
+In order to protect your environment at least two public services responses are used to get and confirm the IP change.
+For more info about the workflow involving public endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
 
 This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify it. 
 It is also very cheap to deploy your own 'what is my IP' service by using something like [Amazon Lambda](https://aws.amazon.com/lambda/) 
