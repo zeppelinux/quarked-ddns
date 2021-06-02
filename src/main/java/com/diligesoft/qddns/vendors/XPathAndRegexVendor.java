@@ -1,37 +1,24 @@
 package com.diligesoft.qddns.vendors;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-import java.io.StringReader;
+import org.apache.camel.CamelContext;
+import org.apache.camel.language.xpath.XPathBuilder;
 
 @RegisterForReflection
 public class XPathAndRegexVendor extends Vendor {
 
-    XPathExpression expr;
+    XPathBuilder builder;
 
     RegexVendor regexVendor;
 
-    XPathAndRegexVendor(String url, String xpathExtractor, String regex) throws XPathExpressionException {
+    XPathAndRegexVendor(String url, String xpathExtractor, String regex) {
         super(url);
-        XPathFactory xPathfactory = XPathFactory.newInstance();
-        XPath xpath = xPathfactory.newXPath();
-        expr = xpath.compile(xpathExtractor);
+        builder = XPathBuilder.xpath(xpathExtractor);
         regexVendor = new RegexVendor(url, regex);
     }
 
     @Override
-    public String extract(String str) throws Exception {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(new InputSource(new StringReader(str)));
-        return regexVendor.extract(expr.evaluate(doc));
+    public String extract(CamelContext context, String str) {
+        return regexVendor.extract(context, builder.evaluate(context, str));
     }
 }

@@ -1,6 +1,7 @@
 package com.diligesoft.qddns.vendors;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import org.apache.camel.CamelContext;
 
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public abstract class Vendor {
 
     private String url;
 
-    public abstract String extract(String str) throws Exception;
+    public abstract String extract(CamelContext context, String str) throws Exception;
 
     Vendor(String url) {
         this.url = url;

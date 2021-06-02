@@ -1,6 +1,7 @@
 package com.diligesoft.qddns.vendors;
 
 import com.jayway.jsonpath.JsonPath;
+import org.apache.camel.CamelContext;
 
 public class JsonPathVendor extends Vendor {
 
@@ -12,7 +13,7 @@ public class JsonPathVendor extends Vendor {
     }
 
     @Override
-    public String extract(String str) {
+    public String extract(CamelContext context, String str) {
         Object dataObject = JsonPath.parse(str).read(extractor);
         return dataObject.toString();
     }

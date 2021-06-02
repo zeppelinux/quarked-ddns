@@ -3,6 +3,8 @@ package com.diligesoft.qddns.routes;
 import com.diligesoft.qddns.VendorsBean;
 import com.diligesoft.qddns.VerifyBean;
 import com.diligesoft.qddns.vendors.Vendor;
+import com.diligesoft.qddns.vendors.XPathVendor;
+import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 
@@ -58,7 +60,7 @@ public class VendorsRoute extends RouteBuilder {
                 .setBody(constant(""))
                 .toD(String.format("${exchangeProperty.%s.url}", CURRENT_VENDOR))
                 .process(e -> {
-                    String ip = e.getProperty(CURRENT_VENDOR, Vendor.class).extract(e.getIn().getBody(String.class));
+                    String ip = e.getProperty(CURRENT_VENDOR, Vendor.class).extract(e.getContext(), e.getIn().getBody(String.class));
                     e.getIn().setBody(ip);
                 })
                 .log(LoggingLevel.DEBUG, "ip: ${body}");

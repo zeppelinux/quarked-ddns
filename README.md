@@ -69,10 +69,8 @@ Grab the quarked-ddns-linux binary from the recent release, and create .env file
 route53.domain=<your-domain>
 route53.region=<your-iam-user-region>
 route53.hostedZoneId=<your-hosted-zone-id>
-aws.accessKey=<your-key-id>
-aws.secretKey=<your-secret-key>
 ```
-You can also set your AWS key and secret as env variables for the process: 
+You can set your AWS key and secret as env variables for the process: 
 ```
 $export AWS_ACCESS_KEY_ID=<your-key-id>
 $export AWS_SECRET_KEY=<your-secret-key>

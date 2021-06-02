@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.diligesoft</groupId>
     <artifactId>quarked-ddns</artifactId>
-    <version>v0.2</version>
+    <version>v0.3</version>
     <description>Quarked Dynamic DNS</description>
     <url>https://github.com/zeppelinux/quarked-ddns</url>
 
@@ -62,6 +62,10 @@
         <dependency>
             <groupId>org.apache.camel.quarkus</groupId>
             <artifactId>camel-quarkus-jsonpath</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.quarkus</groupId>
+            <artifactId>camel-quarkus-xpath</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.quarkus</groupId>

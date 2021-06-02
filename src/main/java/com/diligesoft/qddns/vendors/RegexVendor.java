@@ -1,6 +1,7 @@
 package com.diligesoft.qddns.vendors;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
+import org.apache.camel.CamelContext;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +17,7 @@ public class RegexVendor extends Vendor {
     }
 
     @Override
-    public String extract(String str) {
+    public String extract(CamelContext context, String str) {
         Matcher matcher = pattern.matcher(str.trim());
         if (matcher.find()){
             return matcher.group(0);
