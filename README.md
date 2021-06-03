@@ -18,7 +18,7 @@ http://ip-api.com
 In order to protect your environment at least two public services responses are used to get and confirm the IP change.
 For more info about the workflow involving public endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
 
-This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify it. 
+This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify/adjust to your needs. 
 It is also very cheap to deploy your own 'what is my IP' service by using something like [Amazon Lambda](https://aws.amazon.com/lambda/) 
 or any other 'Server-less' solution and use it as an endpoint for the quarked-ddns.
 
@@ -29,7 +29,7 @@ If you own or aware of any other mainstream router that provides the REST API or
 2. AWS_ACCESS_KEY_ID and AWS_SECRET_KEY for IAM that can manage your domain (read below how to get it)
 
 ## Resources
-quarked-ddns runs on Quarkus, i.e. it consumes very little resources (~10MiB of RAM & ~3mCPU):
+quarked-ddns runs on Quarkus, i.e. it consumes very little resources (~11MiB of RAM & ~2mCPU):
 ![Resources Screenshot](https://zeppelinux.github.io/images/qddns-resources-screenshot.png)
 
 it takes ~36ms to boot
