@@ -15,12 +15,11 @@ http://checkip.dyndns.org
 http://trackip.net
 http://ip-api.com
 ``` 
-In order to protect your environment at least two public services responses are used to get and confirm the IP change.
+In order to protect your environment at least two public services responses are used to identify and confirm the IP change by your ISP.
 For more info about the workflow involving public endpoints/services [read this wiki page](https://github.com/zeppelinux/quarked-ddns/wiki/Public-Services-Workflow).
 
-This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify/adjust to your needs. 
-It is also very cheap to deploy your own 'what is my IP' service by using something like [Amazon Lambda](https://aws.amazon.com/lambda/) 
-or any other 'Server-less' solution and use it as an endpoint for the quarked-ddns.
+This list is exposed by the service configuration (ConfigMap in K8's deployments), so it's pretty easy to modify/adjust. 
+It is also very cheap to deploy your own 'what is my IP' service and use it as an endpoint for the quarked-ddns.
 
 If you own or aware of any other mainstream router that provides the REST API or some reliable public IP service - let us know. 
 
@@ -114,6 +113,8 @@ $java -DlogLevel=DEBUG -jar quarkus-app/quarkus-run.jar
 ```
 
 ## Docker Container
+Docker image auto created from the source [available on DockerHub](https://hub.docker.com/r/zeppelinux/quarked-ddns) 
+
 ```
 $docker pull zeppelinux/quarked-ddns:tag
 ```
