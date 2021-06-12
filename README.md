@@ -4,7 +4,7 @@ Provides Dynamic DNS solution running.
 Ideally it integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) but can use 
 public services if Google WiFi Router is not available. 
 
-If Google WiFi is integration disabled quarked-ddns will use public services endpoints from the list below in order to get 
+If Google WiFi integration is disabled quarked-ddns will use public services endpoints from the list below in order to get 
 and verify your public IP:
 ```
 http://checkip.amazonaws.com
