@@ -1,5 +1,5 @@
 # quarked-ddns
-Provides Dynamic DNS solution running. 
+Provides Dynamic DNS solution. 
 
 Ideally it integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) but can use 
 public services if Google WiFi Router is not available. 
