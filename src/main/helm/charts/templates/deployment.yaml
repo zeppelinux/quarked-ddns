@@ -90,24 +90,6 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-    {{- if .Values.healthChecks.liveness.enabled }}
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: {{ .Values.healthChecks.liveness.initialDelaySeconds }}
-            periodSeconds: {{ .Values.healthChecks.liveness.periodSeconds }}
-            failureThreshold: {{ .Values.healthChecks.liveness.failureThreshold }}
-    {{- end}}
-    {{- if .Values.healthChecks.readiness.enabled }}
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: {{ .Values.healthChecks.readiness.initialDelaySeconds }}
-            periodSeconds: {{ .Values.healthChecks.readiness.periodSeconds }}
-            failureThreshold: {{ .Values.healthChecks.readiness.failureThreshold }}
-    {{- end}}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

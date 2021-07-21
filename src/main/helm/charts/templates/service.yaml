@@ -18,7 +18,7 @@ spec:
         {{- end }}
   ports:
     - name: http
-      port: 80
+      port: 8080
       targetPort: http
   selector:
     app.kubernetes.io/name: {{ .Release.Name }}
