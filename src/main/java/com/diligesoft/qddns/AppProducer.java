@@ -26,7 +26,7 @@ public class AppProducer {
     public AmazonRoute53 getAmazonClient() {
         logger.info("initializing Amazon Route53 client...");
         AmazonRoute53 client = AmazonRoute53ClientBuilder.standard().withRegion(region).build();
-        logger.info("initialized");
+        logger.debug("initialized");
         return client;
     }
 }
