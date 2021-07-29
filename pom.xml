@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.diligesoft</groupId>
     <artifactId>quarked-ddns</artifactId>
-    <version>v0.7</version>
+    <version>v0.8</version>
     <description>Quarked Dynamic DNS</description>
     <url>https://github.com/zeppelinux/quarked-ddns</url>
 
