@@ -1,11 +1,11 @@
 package com.diligesoft.qddns.checks;
 
-import com.amazonaws.services.route53.AmazonRoute53;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.HealthCheckResponseBuilder;
 import org.eclipse.microprofile.health.Readiness;
 import org.jboss.logging.Logger;
+import software.amazon.awssdk.services.route53.Route53Client;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class ReadinessCheck implements HealthCheck {
 
     @Inject
-    AmazonRoute53 client;
+    Route53Client client;
 
 
     @Inject

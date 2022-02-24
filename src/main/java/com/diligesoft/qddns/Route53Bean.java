@@ -1,7 +1,5 @@
 package com.diligesoft.qddns;
 
-import com.amazonaws.services.route53.AmazonRoute53;
-import com.amazonaws.services.route53.model.*;
 import com.diligesoft.qddns.vendors.Vendor;
 import io.quarkus.arc.Unremovable;
 import io.quarkus.runtime.annotations.RegisterForReflection;
@@ -9,6 +7,8 @@ import org.apache.camel.Body;
 import org.apache.camel.ExchangeProperty;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
+import software.amazon.awssdk.services.route53.Route53Client;
+import software.amazon.awssdk.services.route53.model.*;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -36,7 +36,7 @@ public class Route53Bean {
     String domain;
 
     @Inject
-    AmazonRoute53 route53;
+    Route53Client route53;
 
     private static String IP_REGEX = "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\.(?!$)|$)){4}$";
 
@@ -47,8 +47,7 @@ public class Route53Bean {
     @PostConstruct
     public void init() {
         domain = domain.endsWith(".") ? domain : String.format("%s.", domain);
-        request = new ListResourceRecordSetsRequest();
-        request.setHostedZoneId(zoneId);
+        request = ListResourceRecordSetsRequest.builder().hostedZoneId(zoneId).build();
     }
 
     public void process(@Body String localIp, @ExchangeProperty(CURRENT_VENDOR) Vendor vendor) {
@@ -61,13 +60,13 @@ public class Route53Bean {
             throw new IllegalArgumentException(String.format("'%s' string doesn't look like a valid IP Address", localIp));
         }
 
-        ListResourceRecordSetsResult result = route53.listResourceRecordSets(request);
+        ListResourceRecordSetsResponse result = route53.listResourceRecordSets(request);
         if (result == null) {
             throw new IllegalArgumentException("can't find recordSet for the hostedZoneId: " + zoneId);
         }
 
-        ResourceRecordSet recordSet = result.getResourceRecordSets().stream()
-                .filter(rrs -> domain.equals(rrs.getName()))
+        ResourceRecordSet recordSet = result.resourceRecordSets().stream()
+                .filter(rrs -> domain.equals(rrs.name()))
                 .findAny()
                 .orElse(null);
 
@@ -75,25 +74,21 @@ public class Route53Bean {
             throw new IllegalArgumentException("can't find managedDomain: " + domain);
         }
 
-        currentIp = recordSet.getResourceRecords().iterator().next().getValue();
+        currentIp = recordSet.resourceRecords().iterator().next().value();
         if (!localIp.equals(currentIp)) {
             logger.info(String.format("record update is required, ISP IP=%s, Route53 IP=%s", localIp, currentIp));
-            ChangeResourceRecordSetsRequest resourceRecordSetsRequest = new ChangeResourceRecordSetsRequest();
-            resourceRecordSetsRequest.setHostedZoneId(zoneId);
-            ChangeBatch batch = new ChangeBatch();
-            recordSet.getResourceRecords().iterator().next().setValue(localIp);
-
-            Change change = new Change(ChangeAction.UPSERT, recordSet);
+            Change change = Change.builder().action(ChangeAction.UPSERT).resourceRecordSet(ResourceRecordSet.builder().name(recordSet.name())
+                    .type(recordSet.type()).ttl(recordSet.ttl()).resourceRecords(ResourceRecord.builder().value(localIp).build()).build()).build();
             List<Change> changes = new ArrayList<>();
             changes.add(change);
-            batch.setChanges(changes);
+            ChangeBatch batch = ChangeBatch.builder().changes(changes).build();
+            ChangeResourceRecordSetsRequest resourceRecordSetsRequest = ChangeResourceRecordSetsRequest.builder().hostedZoneId(zoneId).changeBatch(batch).build();
 
-            resourceRecordSetsRequest.setChangeBatch(batch);
-            ChangeResourceRecordSetsResult rrsResult = route53.changeResourceRecordSets(resourceRecordSetsRequest);
+            ChangeResourceRecordSetsResponse rrsResult = route53.changeResourceRecordSets(resourceRecordSetsRequest);
             currentIp = localIp;
             logger.info(String.format("changeResourceRecordSets response: %s", rrsResult));
         } else {
-            logger.info(String.format("%s says your IP is the same as in Route53", vendor == null ? "Google WiFi" : vendor.getUrl()));
+            logger.info(String.format("ip verified using %s", vendor == null ? "Google WiFi" : vendor.getUrl()));
         }
     }
 

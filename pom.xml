@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.diligesoft</groupId>
     <artifactId>quarked-ddns</artifactId>
-    <version>v0.8</version>
+    <version>v0.9</version>
     <description>Quarked Dynamic DNS</description>
     <url>https://github.com/zeppelinux/quarked-ddns</url>
 
@@ -35,10 +35,10 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
+        <quarkus-plugin.version>2.7.2.Final</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+        <quarkus.platform.version>2.7.2.Final</quarkus.platform.version>
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <dockerImageName>zeppelinux/quarked-ddns</dockerImageName>
     </properties>
@@ -104,15 +104,21 @@
             <artifactId>commons-logging-jboss-logging</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-route53</artifactId>
-            <version>1.11.1022</version>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>route53</artifactId>
+            <version>2.17.130</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+<!--        https://github.com/aws/aws-sdk-java-v2/issues/446-->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>apache-client</artifactId>
+            <version>2.17.135</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>

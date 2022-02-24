@@ -1,10 +1,11 @@
 package com.diligesoft.qddns;
 
-import com.amazonaws.services.route53.AmazonRoute53;
-import com.amazonaws.services.route53.AmazonRoute53ClientBuilder;
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.apache.ApacheHttpClient;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.route53.Route53Client;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -17,16 +18,11 @@ public class AppProducer {
     @Inject
     Logger logger;
 
-    @Inject
-    @ConfigProperty(name = "route53.region")
-    String region;
-
     @Produces
     @ApplicationScoped
-    public AmazonRoute53 getAmazonClient() {
-        logger.info("initializing Amazon Route53 client...");
-        AmazonRoute53 client = AmazonRoute53ClientBuilder.standard().withRegion(region).build();
-        logger.debug("initialized");
-        return client;
+    public Route53Client getAmazonClient() {
+        logger.info("initializing Route53Client...");
+        SdkHttpClient httpClient = ApacheHttpClient.builder().build();
+        return Route53Client.builder().region(Region.AWS_GLOBAL).httpClient(httpClient).build();
     }
 }
