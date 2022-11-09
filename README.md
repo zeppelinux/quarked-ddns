@@ -1,8 +1,8 @@
 # quarked-ddns
-Provides Dynamic DNS solution. 
+Provides Free (if you have your domain registered with AWS Route53) Dynamic DNS solution. 
 
-Ideally it integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) but can use 
-public services if Google WiFi Router is not available. 
+Integrates with [Google WiFi Router API](https://github.com/olssonm/google-wifi-api) and/or uses 
+public services. 
 
 If Google WiFi integration is disabled quarked-ddns will use public services endpoints from the list below in order to get 
 and verify your public IP:
